@@ -1,4 +1,4 @@
-// Gera as capturas de tela usadas no TCC, a partir do banco de DEMONSTRAÇÃO (dados fictícios).
+// Gera as capturas de tela usadas no TCC, a partir do banco de demonstração (dados fictícios).
 //
 //   node testes/capturas.mjs [pasta de saída]     (padrão: docs/telas)
 //
@@ -56,7 +56,7 @@ const faixa = async (pagina, nome, seletores) => {
   await foto(pagina, nome, { fullPage: true, clip: r });
 };
 
-// ---------------------------------------------------------------- entrada
+// ----- Entrada -----
 let p = await sessao(null, DESKTOP);
 await foto(p, 'tela_entrar');
 await p.fill('#email', 'morador1@demo.test');
@@ -66,7 +66,7 @@ await p.waitForLoadState('networkidle');
 await foto(p, 'tela_entrar_erro');
 await p.context().close();
 
-// ---------------------------------------------------------------- morador, no celular
+// ----- Morador, no celular -----
 p = await sessao('morador1@demo.test', CELULAR);
 await p.goto(`${BASE}/ocorrencias/nova`);
 await p.selectOption('#categoria_id', { label: 'Vazamento ou infiltração' });
@@ -100,7 +100,7 @@ await p.goto(`${BASE}/conta`);
 await foto(p, 'cel_conta');
 await p.context().close();
 
-// ---------------------------------------------------------------- portaria
+// ----- Portaria -----
 p = await sessao('portaria@demo.test', DESKTOP);
 await foto(p, 'portaria_dia');
 await p.goto(`${BASE}/ocorrencias/${nova}`);
@@ -109,7 +109,7 @@ await p.goto(`${BASE}/ocorrencias/nova`);
 await foto(p, 'portaria_registrar');
 await p.context().close();
 
-// ---------------------------------------------------------------- síndico
+// ----- Síndico -----
 p = await sessao('sindico@demo.test', DESKTOP);
 await faixa(p, 'painel_atencao', ['.PageHead', 'section[aria-label="Indicadores principais"]']);
 await faixa(p, 'painel_categorias', ['section[aria-labelledby=t-situacao]', 'section[aria-labelledby=t-pareto]']);

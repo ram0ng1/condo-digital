@@ -1,5 +1,5 @@
 <?php
-// RF12: lista de usuários (síndico).
+// Lista de usuários, só para o síndico.
 $u = exigir_login('sindico');
 $usuarios = consulta(
     'SELECT us.id, us.nome, us.email, us.perfil, us.ativo, us.bloqueado_ate, un.bloco, un.numero

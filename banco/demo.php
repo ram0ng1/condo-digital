@@ -1,6 +1,6 @@
 <?php
-// Dados de DEMONSTRAÇÃO, todos fictícios: servem para apresentar o sistema, rodar os testes e
-// gerar as capturas de tela. NÃO são dados do condomínio estudado e não devem ser usados como
+// Dados de demonstração, todos fictícios: servem para apresentar o sistema, rodar os testes e
+// gerar as capturas de tela. Não são dados do condomínio estudado e não podem ser usados como
 // resultado do TCC.
 //
 //   php banco/demo.php            recria o banco de demonstração
@@ -42,7 +42,7 @@ $sorteio = function (array $pesos): string {
     }
 };
 
-// ------------------------------------------------------------------ usuários
+// ----- Usuários -----
 
 $hash = password_hash('Demo@2026', PASSWORD_DEFAULT);
 $usuario = function (string $nome, string $email, string $perfil, ?array $unidade = null) use ($hash): int {
@@ -62,7 +62,7 @@ foreach ([['A', '101'], ['A', '204'], ['A', '302'], ['B', '103'], ['B', '201'], 
     $moradores[] = $usuario('Morador Demo ' . ($i + 1), 'morador' . ($i + 1) . '@demo.test', 'morador', $un);
 }
 
-// ------------------------------------------------------------------ livro físico (18 meses, importado como no uso real)
+// ----- Livro físico (18 meses, importado como no uso real) -----
 
 $categorias = ['Barulho' => 30, 'Garagem e veículos' => 18, 'Vazamento ou infiltração' => 14, 'Animais' => 9, 'Áreas comuns' => 8,
     'Limpeza' => 6, 'Elevador' => 5, 'Obras e reformas' => 4, 'Segurança e portaria' => 3, 'Encomendas' => 2, 'Outros' => 1];
@@ -137,7 +137,7 @@ if ($importacao['erros']) {
     exit("Falha ao importar o livro de exemplo:\n" . print_r($importacao['erros'], true));
 }
 
-// ------------------------------------------------------------------ uso no sistema (últimas 6 semanas)
+// ----- Uso no sistema (últimas 6 semanas) -----
 
 $ocorrencia = function (string $quando, int $autor, string $perfil, string $cat, string $local, string $texto, string $urgencia,
     array $passos = []) use ($sindico): int {

@@ -38,7 +38,7 @@ function agora(): string
     return date('Y-m-d H:i:s');
 }
 
-// ------------------------------------------------------------------ banco
+// ----- Banco -----
 
 function bd(): PDO
 {
@@ -62,7 +62,7 @@ function consulta(string $sql, array $params = []): PDOStatement
     return $st;
 }
 
-// ------------------------------------------------------------------ saída
+// ----- Saída -----
 
 function e(mixed $v): string
 {
@@ -118,7 +118,7 @@ function avisar_tela(string $tipo, string $mensagem): void
     $_SESSION['flash'][] = [$tipo, $mensagem];
 }
 
-// ------------------------------------------------------------------ sessão e autenticação
+// ----- Sessão e autenticação -----
 
 function iniciar_sessao(): void
 {
@@ -131,7 +131,7 @@ function iniciar_sessao(): void
     session_set_cookie_params(['path' => base() . '/', 'httponly' => true, 'samesite' => 'Lax', 'secure' => $https]);
     session_start();
 
-    // RNF03: a sessão expira após o tempo de inatividade configurado.
+    // Sessão parada por mais tempo que o configurado é encerrada.
     $limite = cfg('sessao_minutos') * 60;
     if (isset($_SESSION['usuario_id'], $_SESSION['ultimo_uso']) && time() - $_SESSION['ultimo_uso'] > $limite) {
         session_unset();
@@ -191,7 +191,7 @@ function exigir_csrf(): void
 }
 
 /**
- * RNF03: confere e-mail e senha, com bloqueio após tentativas seguidas de senha incorreta.
+ * Confere e-mail e senha. Depois de várias senhas erradas seguidas, a conta fica bloqueada por um tempo.
  * Devolve o id do usuário ou uma mensagem de erro (a mesma para e-mail inexistente e senha errada).
  */
 function autenticar(string $email, string $senha): int|string
@@ -223,7 +223,7 @@ function autenticar(string $email, string $senha): int|string
     return (int) $u['id'];
 }
 
-/** RNF03: operações sensíveis (exportar, gerenciar usuários) pedem a senha de novo. */
+/** Exportar dados e gerenciar usuários pedem a senha de novo, mesmo com a sessão aberta. */
 function senha_confere(array $u, string $senha): bool
 {
     $hash = consulta('SELECT senha_hash FROM usuarios WHERE id = ?', [$u['id']])->fetchColumn();
@@ -238,7 +238,7 @@ function validar_senha_nova(string $senha): ?string
     return null;
 }
 
-// ------------------------------------------------------------------ auditoria (RNF02) e avisos (RF06)
+// ----- Registro de acessos e avisos -----
 
 function auditar(string $acao, ?int $ocorrenciaId = null, ?string $detalhe = null, ?int $usuarioId = null): void
 {

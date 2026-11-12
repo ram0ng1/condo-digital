@@ -3,3 +3,6 @@
 /storage/fotos/*
 !/storage/fotos/.gitkeep
 
+# Respostas dos participantes do teste de usabilidade
+/testes/usabilidade_resultados.csv
+

@@ -1,6 +1,6 @@
 <?php
-// Detalhe da ocorrência: descrição, fotos e histórico (RF04, RF07); resposta do síndico (RF05).
-// Cada abertura fica no registro de acessos (RNF02).
+// Detalhe da ocorrência: descrição, fotos, histórico e a resposta do síndico.
+// Cada abertura fica no registro de acessos.
 $u = exigir_login();
 $o = buscar_ocorrencia($id);
 if (!$o || !pode_ver($u, $o)) {

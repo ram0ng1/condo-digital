@@ -1,5 +1,6 @@
 <?php
-// RF01: autenticação. A mensagem de erro é a mesma para e-mail inexistente e senha errada.
+// Tela de entrada. A mensagem de erro é a mesma para e-mail inexistente e senha errada,
+// para não revelar quais e-mails têm conta.
 if (usuario()) {
     redirecionar('');
 }

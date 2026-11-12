@@ -1,9 +1,10 @@
 // Testes funcionais de ponta a ponta, um ou mais por caso de uso do TCC (UC01 a UC13).
 // Cada caso de teste (CT) dirige um navegador de verdade contra o sistema em execução.
+// Nas descrições, RG1 a RG5 são as regras de negócio do TCC, listadas no README.
 //
 //   node testes/funcional.mjs
 //
-// ATENÇÃO: recria o banco de DEMONSTRAÇÃO antes de começar (banco/demo.php se recusa a
+// Atenção: recria o banco de demonstração antes de começar (banco/demo.php se recusa a
 // apagar um banco que tenha contas reais). Grava o resultado em testes/resultado.md.
 import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
@@ -57,7 +58,7 @@ async function sessao(email, senha = SENHA, opcoes = {}) {
 const csrf = (pagina) => pagina.locator('input[name=csrf]').first().inputValue();
 const texto = async (pagina) => (await pagina.locator('body').innerText()).replace(/\s+/g, ' ');
 
-// ------------------------------------------------------------------ UC01 Autenticar-se
+// ----- UC01 Autenticar-se -----
 await ct('CT01', 'UC01', 'Morador entra e cai em "Minhas ocorrências"; síndico cai no painel', async (v) => {
   const m = await sessao('morador1@demo.test');
   v(m.url().endsWith('/ocorrencias') && (await texto(m)).includes('Minhas ocorrências'), `morador foi para ${m.url()}`);
@@ -100,7 +101,7 @@ await ct('CT04', 'UC01', 'Página interna sem login redireciona para a tela de e
   await c.close();
 });
 
-// ------------------------------------------------------------------ UC02 Registrar ocorrência
+// ----- UC02 Registrar ocorrência -----
 let nova; // número da ocorrência criada no CT05, usada pelos casos seguintes
 const morador = await sessao('morador2@demo.test');
 await ct('CT05', 'UC02', 'Morador registra ocorrência com foto; ela nasce "Aberta" com data e hora do servidor', async (v) => {
@@ -149,7 +150,7 @@ await ct('CT07', 'UC02', 'Arquivo que não é imagem é recusado como foto', asy
   v((await morador.locator('#erro-fotos').innerText()).includes('JPG, PNG ou WebP'), 'aceitou arquivo que não é imagem');
 });
 
-// ------------------------------------------------------------------ UC03 Acompanhar / RG3 visibilidade
+// ----- UC03 Acompanhar (cada perfil vê só o que pode) -----
 await ct('CT08', 'UC03', 'Morador vê a própria ocorrência na lista e não abre a de outro morador', async (v) => {
   await morador.goto(`${BASE}/ocorrencias`);
   v((await texto(morador)).includes(`nº ${nova}`), 'a ocorrência nova não está na lista do autor');
@@ -160,7 +161,7 @@ await ct('CT08', 'UC03', 'Morador vê a própria ocorrência na lista e não abr
   v((await morador.goto(`${BASE}/ocorrencias/${livro}`)).status() === 404, 'morador abriu registro do livro físico');
 });
 
-// ------------------------------------------------------------------ UC05 Ocorrências do dia (portaria)
+// ----- UC05 Ocorrências do dia (portaria) -----
 const portaria = await sessao('portaria@demo.test');
 await ct('CT09', 'UC05', 'Portaria vê a ocorrência do dia, mas sem a foto, nem pelo endereço direto', async (v) => {
   v((await texto(portaria)).includes(`nº ${nova}`), 'a ocorrência de hoje não aparece para a portaria');
@@ -185,7 +186,7 @@ await ct('CT10', 'UC02', 'Portaria registra em nome de um morador, indicando a u
   v(t.includes('Portaria Demonstração (Portaria)') && t.includes('Bloco B, unidade 201'), 'autor ou unidade envolvida não aparecem');
 });
 
-// ------------------------------------------------------------------ UC06 Alterar status e responder
+// ----- UC06 Alterar status e responder -----
 const sindico = await sessao('sindico@demo.test');
 await ct('CT11', 'UC12', 'Síndico é avisado da nova ocorrência', async (v) => {
   await sindico.goto(`${BASE}/avisos`);
@@ -232,7 +233,7 @@ await ct('CT15', 'UC03', 'Morador vê o novo status, lê o comentário do síndi
   v(t.includes('Resolvida') && t.includes('Tubulação reparada.'), 'status ou comentário não aparecem para o autor');
 });
 
-// ------------------------------------------------------------------ UC04 Complementar / RG2 imutabilidade
+// ----- UC04 Complementar (o histórico não se altera) -----
 await ct('CT16', 'UC04', 'Autor acrescenta complemento; o registro original continua igual (RG2)', async (v) => {
   const original = sql(`SELECT descricao FROM ocorrencias WHERE id = ${nova}`);
   await morador.fill('#texto', 'A goteira parou depois do reparo. Obrigado.');
@@ -254,13 +255,13 @@ await ct('CT17', 'UC04', 'O banco recusa alterar ou apagar o histórico, mesmo c
     try {
       execFileSync(MARIADB, ['-uroot', 'tcc', '-e', comando], { stdio: 'pipe' });
     } catch (e) {
-      recusou = /RG2|RNF02/.test(String(e.stderr));
+      recusou = /nao pode ser/.test(String(e.stderr));
     }
     v(recusou, `o banco aceitou: ${comando}`);
   }
 });
 
-// ------------------------------------------------------------------ UC07 Pesquisar e exportar
+// ----- UC07 Pesquisar e exportar -----
 await ct('CT18', 'UC07', 'Filtro por categoria e status devolve só o que corresponde', async (v) => {
   const cat = sql("SELECT id FROM categorias WHERE nome = 'Barulho'");
   await sindico.goto(`${BASE}/ocorrencias?categoria=${cat}&status=resolvida&origem=sistema`);
@@ -286,7 +287,7 @@ await ct('CT19', 'UC07', 'Exportar pede a senha de novo: errada recusa, correta 
   v(sql("SELECT COUNT(*) FROM registros_acesso WHERE acao = 'exportar'") === '1', 'a exportação não ficou no registro de acessos');
 });
 
-// ------------------------------------------------------------------ UC08 Painel
+// ----- UC08 Painel -----
 await ct('CT20', 'UC08', 'Painel mostra os mesmos números que o banco (total, taxa de resposta, incompletos)', async (v) => {
   await sindico.goto(`${BASE}/painel?origem=livro_fisico`);
   const t = await texto(sindico);
@@ -307,7 +308,7 @@ await ct('CT21', 'UC08', 'Morador e portaria não acessam painel, usuários, ace
   }
 });
 
-// ------------------------------------------------------------------ UC09 Importar livro físico
+// ----- UC09 Importar livro físico -----
 const cabecalho = 'id;data;hora;dia_semana;turno;registrante;local;bloco_andar;categoria;descricao_resumo;urgencia_percebida;houve_resposta;data_resposta;desfecho;recorrencia;completo';
 const enviarCsv = async (linhas) => {
   await sindico.goto(`${BASE}/importar`);
@@ -343,7 +344,7 @@ await ct('CT23', 'UC09', 'Arquivo com linha inválida: nada é importado e o err
   v(sql('SELECT COUNT(*) FROM ocorrencias') === antes, 'importou parte do arquivo com erro');
 });
 
-// ------------------------------------------------------------------ UC10 Gerenciar usuários / UC13 trocar senha
+// ----- UC10 Gerenciar usuários / UC13 trocar senha -----
 await ct('CT24', 'UC10', 'Criar usuário exige a senha do síndico; com senha errada nada é criado', async (v) => {
   await sindico.goto(`${BASE}/usuarios/novo`);
   await sindico.fill('#nome', 'Moradora Teste');
@@ -397,7 +398,7 @@ await ct('CT26', 'UC10', 'Usuário desativado não entra; síndico não consegue
   v((await texto(sindico)).includes('não pode desativar a própria conta'), 'o síndico desativou a própria conta');
 });
 
-// ------------------------------------------------------------------ UC11 Registro de acessos
+// ----- UC11 Registro de acessos -----
 await ct('CT27', 'UC11', 'Registro de acessos mostra quem leu e quem alterou a ocorrência (RNF02)', async (v) => {
   await sindico.goto(`${BASE}/acessos?ocorrencia=${nova}`);
   const t = await texto(sindico);
@@ -406,7 +407,7 @@ await ct('CT27', 'UC11', 'Registro de acessos mostra quem leu e quem alterou a o
   }
 });
 
-// ------------------------------------------------------------------ requisitos não funcionais
+// ----- Requisitos não funcionais -----
 await ct('CT28', 'RNF03', 'Formulário sem o código de proteção (CSRF) é recusado', async (v) => {
   const r = await sindico.request.post(`${BASE}/ocorrencias/${nova}`, { form: { acao: 'complemento', texto: 'pedido forjado por outro site' } });
   v(r.status() === 403, `respondeu ${r.status()}`);
@@ -495,7 +496,7 @@ await ct('CT33', 'RG5', 'Retenção: ocorrência encerrada além do prazo é ano
 
 await navegador.close();
 
-// ------------------------------------------------------------------ resultado
+// ----- Resultado -----
 const aprovados = resultados.filter((r) => r.ok).length;
 const md = [
   `# Resultado dos testes funcionais`,

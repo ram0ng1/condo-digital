@@ -1,6 +1,6 @@
 <?php
-// Testes de unidade das regras que não dependem do banco: indicadores (Quadro 3 do TCC),
-// ciclo de status (RG1) e leitura do CSV do livro físico (RF10).
+// Testes das regras que não dependem do banco: cálculo dos indicadores, ciclo de status
+// e leitura do CSV do livro físico.
 //
 //   php testes/unidade.php
 
@@ -26,7 +26,7 @@ function confere(string $nome, mixed $obtido, mixed $esperado): void
         . "\n        obtido:   " . json_encode($obtido, JSON_UNESCAPED_UNICODE) . "\n";
 }
 
-// ---------------------------------------------------------------- mediana e turnos
+// ----- Mediana e turnos -----
 confere('mediana de lista ímpar', mediana([9, 1, 5]), 5.0);
 confere('mediana de lista par', mediana([1, 2, 3, 10]), 2.5);
 confere('mediana de lista vazia', mediana([]), null);
@@ -35,7 +35,7 @@ confere('turno 6h é manhã', turno(6), 'Manhã');
 confere('turno 17h é tarde', turno(17), 'Tarde');
 confere('turno 23h é noite', turno(23), 'Noite');
 
-// ---------------------------------------------------------------- indicadores
+// ----- Indicadores -----
 $l = fn(string $data, string $cat, string $local, int $resp = 0, ?string $respEm = null, int $completo = 1, string $origem = 'livro_fisico') => [
     'id' => 0, 'origem' => $origem, 'registrada_em' => $data, 'hora_informada' => 1, 'categoria' => $cat, 'local' => $local,
     'status' => 'resolvida', 'houve_resposta' => $resp, 'respondida_em' => $respEm, 'completo' => $completo,
@@ -66,7 +66,7 @@ confere('registro sem data conta no total', $semData['total'], 2);
 confere('registro sem data não entra na recorrência', $semData['recorrencia'], 0.0);
 confere('conjunto vazio não divide por zero', indicadores([])['taxa_resposta'], null);
 
-// ---------------------------------------------------------------- pontos de atenção
+// ----- Pontos de atenção -----
 $limites = ['dias_sem_resposta' => 7, 'recorrencia_min' => 3, 'recorrencia_dias' => 90];
 $aberta = ['status' => 'aberta', 'origem' => 'sistema'] + $l('2026-03-01 08:00:00', 'Elevador', 'Elevador');
 $pontos = pontos_de_atencao(indicadores([$aberta]), [$aberta], '2026-03-20 08:00:00', $limites);
@@ -77,7 +77,7 @@ $tres = [$l('2026-03-01 20:00:00', 'Barulho', 'Salão', 1), $l('2026-03-08 20:00
 $pontos = pontos_de_atencao(indicadores($tres), $tres, '2026-03-20 08:00:00', $limites);
 confere('três ocorrências iguais em 90 dias geram "problema recorrente"', in_array('Problema recorrente', array_column($pontos, 1), true), true);
 
-// ---------------------------------------------------------------- ciclo de status (RG1)
+// ----- Ciclo de status -----
 confere('aberta -> em análise é permitido', transicao_valida('aberta', 'em_analise'), true);
 confere('aberta -> resolvida é recusado', transicao_valida('aberta', 'resolvida'), false);
 confere('em análise -> resolvida é permitido', transicao_valida('em_analise', 'resolvida'), true);
@@ -85,7 +85,7 @@ confere('em análise -> arquivada é permitido', transicao_valida('em_analise', 
 confere('resolvida -> aberta é recusado', transicao_valida('resolvida', 'aberta'), false);
 confere('arquivada é final', transicao_valida('arquivada', 'em_analise'), false);
 
-// ---------------------------------------------------------------- CSV do livro físico (RF10)
+// ----- CSV do livro físico -----
 [$cab, $reg] = ler_csv("\xEF\xBB\xBFid;data;descricao_resumo\r\n1;05/01/2026;\"Som alto; vizinho reclamou\"\r\n\r\n2;06/01/2026;Goteira\r\n");
 confere('CSV: cabeçalho sem BOM', $cab, ['id', 'data', 'descricao_resumo']);
 confere('CSV: ponto e vírgula dentro de aspas', $reg[2]['descricao_resumo'], 'Som alto; vizinho reclamou');
@@ -98,7 +98,7 @@ confere('data vazia (ilegível no livro)', data_iso(''), null);
 confere('sim/não: "Não"', sim_nao('Não'), false);
 confere('sim/não: valor desconhecido', sim_nao('talvez'), null);
 
-// ---------------------------------------------------------------- apresentação
+// ----- Apresentação -----
 confere('número inteiro sem casas', numero(100.0), '100');
 confere('número com vírgula decimal', numero(37.5), '37,5');
 confere('dias no singular', dias(1.0), '1 dia');

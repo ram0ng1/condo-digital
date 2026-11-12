@@ -10,28 +10,29 @@ $config = [
     'nome_condominio'  => 'Condomínio',
     'fuso'             => 'America/Sao_Paulo',
 
-    // Segurança (RNF03)
+    // Segurança
     'forcar_https'     => false, // true em produção: redireciona todo acesso HTTP para HTTPS
     'sessao_minutos'   => 15,    // inatividade até a sessão expirar
     'tentativas_login' => 5,     // senhas erradas seguidas até bloquear a conta
     'bloqueio_minutos' => 15,
     'senha_minima'     => 8,
 
-    // Fotos (RF03)
+    // Fotos
     'max_fotos'        => 3,
     'max_foto_bytes'   => 8 * 1024 * 1024,
     'pasta_fotos'      => __DIR__ . '/../storage/fotos',
 
-    // Avisos por e-mail (RF06)
+    // Avisos por e-mail
     'enviar_email'     => true,
     'email_remetente'  => 'nao-responda@tcc.test',
 
-    // Apoio à decisão: limites usados nos pontos de atenção do painel
+    // Limites que fazem o painel destacar um ponto de atenção para o síndico
     'alerta_dias_sem_resposta' => 7,
     'alerta_recorrencia_min'   => 3,  // ocorrências da mesma categoria e local...
     'alerta_recorrencia_dias'  => 90, // ...nesta janela de dias
 
-    // RG5: meses até a ocorrência ser anonimizada por banco/retencao.php (null = não anonimiza)
+    // Prazo de guarda: depois de quantos meses banco/retencao.php anonimiza a ocorrência
+    // encerrada (null = nunca anonimiza)
     'retencao_meses'   => null,
 ];
 

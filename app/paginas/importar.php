@@ -1,5 +1,5 @@
 <?php
-// RF10: importar a transcrição anonimizada do livro físico (CSV com os campos do Apêndice C do TCC).
+// Importa a transcrição do livro físico, já sem nomes (modelo em banco/exemplo_livro_fisico.csv).
 $u = exigir_login('sindico');
 $resultado = null;
 

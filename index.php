@@ -1,5 +1,5 @@
 <?php
-// Livro de Ocorrências Digital — controlador frontal: toda requisição entra por aqui.
+// Livro de Ocorrências Digital. Toda requisição entra por este arquivo, que escolhe a página.
 
 declare(strict_types=1);
 

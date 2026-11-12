@@ -1,5 +1,5 @@
 <?php
-// RG5 (retenção): anonimiza as ocorrências encerradas há mais tempo que o prazo de guarda
+// Retenção: anonimiza as ocorrências encerradas há mais tempo que o prazo de guarda
 // definido pelo condomínio (retencao_meses em app/config.local.php). A ocorrência continua
 // contando nos indicadores (categoria, local, datas, status), mas perde a descrição, os
 // comentários, as fotos e o vínculo com o autor e com a unidade.
@@ -24,7 +24,7 @@ $ids = consulta(
     [$limite]
 )->fetchAll(PDO::FETCH_COLUMN);
 
-bd()->exec('SET @retencao = 1'); // única situação em que os gatilhos de imutabilidade (RG2) liberam a alteração
+bd()->exec('SET @retencao = 1'); // única situação em que os gatilhos do banco deixam alterar o histórico
 foreach ($ids as $id) {
     $fotos = consulta('SELECT caminho_arquivo FROM anexos WHERE ocorrencia_id = ?', [$id])->fetchAll(PDO::FETCH_COLUMN);
     bd()->beginTransaction();

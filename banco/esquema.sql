@@ -1,5 +1,5 @@
 -- Livro de Ocorrências Digital: esquema do banco de dados (MariaDB / MySQL).
--- Aplicado por banco/instalar.php. Datas e horas são gravadas pela aplicação (RNF06).
+-- Aplicado por banco/instalar.php. Datas e horas são gravadas pela aplicação, com o relógio do servidor.
 
 CREATE TABLE unidades (
     id      INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -125,24 +125,24 @@ CREATE TABLE avisos (
     CONSTRAINT fk_aviso_ocorrencia FOREIGN KEY (ocorrencia_id) REFERENCES ocorrencias (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- RG2 (imutabilidade): o histórico não pode ser alterado nem apagado, nem por quem tem
--- acesso direto ao banco. A única exceção é a rotina de retenção (RG5), que liga @retencao.
+-- O histórico não pode ser alterado nem apagado, nem por quem tem acesso direto ao banco.
+-- A única exceção é a rotina de retenção (banco/retencao.php), que liga @retencao para anonimizar.
 CREATE TRIGGER movimentacoes_sem_alteracao BEFORE UPDATE ON movimentacoes FOR EACH ROW
-    BEGIN IF @retencao IS NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'RG2: movimentacao nao pode ser alterada'; END IF; END;
+    BEGIN IF @retencao IS NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Historico imutavel: movimentacao nao pode ser alterada'; END IF; END;
 
 CREATE TRIGGER movimentacoes_sem_exclusao BEFORE DELETE ON movimentacoes FOR EACH ROW
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'RG2: movimentacao nao pode ser excluida';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Historico imutavel: movimentacao nao pode ser excluida';
 
 CREATE TRIGGER ocorrencias_sem_exclusao BEFORE DELETE ON ocorrencias FOR EACH ROW
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'RG2: ocorrencia nao pode ser excluida';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Historico imutavel: ocorrencia nao pode ser excluida';
 
 CREATE TRIGGER ocorrencias_sem_reescrita BEFORE UPDATE ON ocorrencias FOR EACH ROW
     BEGIN IF @retencao IS NULL AND (NEW.descricao <> OLD.descricao OR NOT (NEW.registrada_em <=> OLD.registrada_em)
             OR NEW.categoria_id <> OLD.categoria_id OR NEW.local_id <> OLD.local_id OR NOT (NEW.autor_id <=> OLD.autor_id))
-        THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'RG2: o registro da ocorrencia nao pode ser reescrito'; END IF; END;
+        THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Historico imutavel: o registro da ocorrencia nao pode ser reescrito'; END IF; END;
 
 CREATE TRIGGER acessos_sem_alteracao BEFORE UPDATE ON registros_acesso FOR EACH ROW
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'RNF02: registro de acesso nao pode ser alterado';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Registro de acessos: nao pode ser alterado';
 
 CREATE TRIGGER acessos_sem_exclusao BEFORE DELETE ON registros_acesso FOR EACH ROW
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'RNF02: registro de acesso nao pode ser excluido';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Registro de acessos: nao pode ser excluido';

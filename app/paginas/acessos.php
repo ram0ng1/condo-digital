@@ -1,5 +1,5 @@
 <?php
-// RNF02: registro de acessos. Mostra quem leu, criou ou alterou cada ocorrência, e quando.
+// Registro de acessos: mostra quem leu, criou ou alterou cada ocorrência, e quando.
 $u = exigir_login('sindico');
 
 const ACOES = ['entrar' => 'Entrou no sistema', 'entrar_falha' => 'Senha incorreta', 'sair' => 'Saiu', 'ler' => 'Leu a ocorrência',

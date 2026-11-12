@@ -1,5 +1,5 @@
 <?php
-// RF06: avisos na tela (nova ocorrência para o síndico; mudança de status para o autor).
+// Avisos na tela: o síndico é avisado de cada ocorrência nova; o autor, de cada mudança de status.
 $u = exigir_login();
 if ($metodo === 'POST') {
     consulta('UPDATE avisos SET lido_em = ? WHERE usuario_id = ? AND lido_em IS NULL', [agora(), $u['id']]);

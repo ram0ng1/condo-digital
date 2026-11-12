@@ -51,7 +51,7 @@ return [
     'banco' => ['dsn' => 'mysql:host=...;dbname=...;charset=utf8mb4', 'usuario' => '...', 'senha' => '...'],
     'nome_condominio' => 'Nome do condomínio',
     'forcar_https' => true,
-    'retencao_meses' => 24, // prazo de guarda acordado com o síndico (RG5)
+    'retencao_meses' => 24, // prazo de guarda acordado com o síndico
 ];
 ```
 
@@ -63,11 +63,13 @@ Com `retencao_meses` definido, agende `php banco/retencao.php` para rodar uma ve
 php testes/unidade.php       # 44 verificações das regras sem banco (indicadores, status, CSV)
 node testes/funcional.mjs    # 33 casos de teste em navegador real, por caso de uso
 node testes/capturas.mjs     # capturas de tela usadas no TCC
+node testes/usabilidade.mjs  # sessão do teste de usabilidade com uma pessoa (tarefas, tempo e SUS)
 ```
 
-Os dois últimos usam o Playwright do RStack (`D:\RStack\bin\playwright`) e **recriam o
+Os três últimos usam o Playwright do RStack (`D:\RStack\bin\playwright`) e **recriam o
 banco de demonstração** antes de começar. O resultado dos testes funcionais fica em
-`testes/resultado.md`.
+`testes/resultado.md`. As sessões de usabilidade ficam em `testes/usabilidade_resultados.csv`,
+que não vai para o repositório; `node testes/usabilidade.mjs --resumo` soma o que já foi coletado.
 
 ## Organização
 
@@ -76,13 +78,26 @@ banco de demonstração** antes de começar. O resultado dos testes funcionais f
 | `index.php`           | Controlador frontal: rotas, sessão, proteção dos formulários |
 | `app/config.php`      | Configuração (banco, sessão, limites, alertas do painel, retenção) |
 | `app/nucleo.php`      | Banco, sessão, autenticação, registro de acessos, avisos |
-| `app/ocorrencias.php` | Regras: visibilidade (RG3), ciclo de status (RG1), histórico (RG2), fotos, CSV |
+| `app/ocorrencias.php` | Regras: quem vê cada ocorrência, ciclo de status, histórico, fotos, CSV |
 | `app/indicadores.php` | Indicadores e pontos de atenção do painel (funções sem banco) |
 | `app/paginas/`        | Uma página por tela |
 | `assets/`             | `ds.css` (design system), `app.css` (ajustes para web e celular), `app.js`, fontes |
 | `banco/`              | `esquema.sql` (tabelas e gatilhos), instalação, demonstração, retenção |
 | `storage/fotos/`      | Fotos das ocorrências (sem acesso direto pela web) |
 | `testes/`             | Testes de unidade, funcionais e capturas |
+
+## Regras de negócio do TCC e onde estão no código
+
+O TCC numera as regras de negócio de RG1 a RG5. Os testes citam esses números; no código,
+cada regra está descrita por extenso.
+
+| Regra | O que diz | Onde está |
+|-------|-----------|-----------|
+| RG1 | Ciclo de status: aberta, em análise e, por fim, resolvida ou arquivada, sempre com comentário do síndico | `mover_status()` em `app/ocorrencias.php` |
+| RG2 | Histórico imutável: nada é editado nem apagado; correção entra como complemento | gatilhos em `banco/esquema.sql` e `complementar()` |
+| RG3 | Visibilidade: o morador vê o que registrou; a portaria, o que registrou e as do dia, sem fotos; o síndico, tudo | `pode_ver()` e `pode_ver_fotos()` |
+| RG4 | Registro pela portaria em nome de um morador, com a unidade envolvida | `criar_ocorrencia()` |
+| RG5 | Retenção: ao fim do prazo de guarda, a ocorrência é anonimizada | `banco/retencao.php` |
 
 ## Segurança, em resumo
 

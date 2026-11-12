@@ -1,5 +1,5 @@
 <?php
-// RF02 e RF03: registrar ocorrência, com até três fotos. Data e hora vêm do servidor (RNF06).
+// Registrar ocorrência, com até três fotos. A data e a hora são as do servidor, não as do aparelho.
 $u = exigir_login();
 $erros = [];
 $d = ['categoria_id' => '', 'local_id' => '', 'referencia_local' => '', 'unidade_id' => '', 'urgencia' => 'media', 'descricao' => ''];

@@ -1,5 +1,5 @@
 <?php
-// RF09: painel de indicadores do síndico (apoio à decisão). Os mesmos indicadores são
+// Painel de indicadores do síndico. Os mesmos indicadores são
 // calculados para o livro físico importado e para o sistema, o que permite comparar antes e depois.
 $u = exigir_login('sindico');
 

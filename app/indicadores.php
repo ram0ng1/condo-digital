@@ -1,7 +1,8 @@
 <?php
-// Indicadores do Quadro 3 do TCC e pontos de atenção do painel (apoio à decisão).
-// Funções puras: recebem as linhas já lidas do banco, o que permite testá-las sem banco
-// (testes/unidade.php) e aplicar o mesmo cálculo ao livro físico e ao sistema.
+// Cálculo dos indicadores do painel e dos pontos de atenção mostrados ao síndico.
+// Nenhuma função daqui consulta o banco: todas recebem as linhas já lidas. Por isso dá
+// para testá-las sem banco (testes/unidade.php) e usar a mesma conta para o livro físico
+// e para o sistema.
 
 declare(strict_types=1);
 
@@ -125,7 +126,7 @@ function serie_mensal(array $porMes): array
 }
 
 /**
- * Apoio à decisão: transforma os indicadores em frases que dizem ao síndico onde agir.
+ * Transforma os indicadores em frases que dizem ao síndico onde agir.
  * São regras fixas e explicáveis (sem inteligência artificial). Cada item: [tipo, título, texto, link?].
  */
 function pontos_de_atencao(array $ind, array $linhas, string $hoje, array $limites): array

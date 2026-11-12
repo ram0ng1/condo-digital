@@ -1,6 +1,6 @@
 <?php
-// Regras das ocorrências: visibilidade (RG3), ciclo de status (RG1), histórico (RG2),
-// fotos (RF03), importação e exportação em CSV (RF10, RF11).
+// Regras das ocorrências: quem pode ver cada uma, por quais status ela passa, o histórico
+// que não se apaga, o tratamento das fotos e a importação e exportação em CSV.
 
 declare(strict_types=1);
 
@@ -9,7 +9,7 @@ const STATUS_COR = ['aberta' => 'is-amber', 'em_analise' => 'is-blue', 'resolvid
 const URGENCIAS = ['baixa' => 'Baixa', 'media' => 'Média', 'alta' => 'Alta'];
 const REGISTRANTES = ['morador' => 'Morador', 'portaria' => 'Portaria', 'zeladoria' => 'Zeladoria', 'sindico' => 'Síndico', 'nao_identificado' => 'Não identificado'];
 
-// RG1: toda ocorrência nasce "aberta", avança para "em análise" e termina "resolvida" ou "arquivada".
+// Toda ocorrência nasce "aberta", avança para "em análise" e termina "resolvida" ou "arquivada".
 const TRANSICOES = ['aberta' => ['em_analise'], 'em_analise' => ['resolvida', 'arquivada'], 'resolvida' => [], 'arquivada' => []];
 
 function transicao_valida(string $de, string $para): bool
@@ -22,7 +22,7 @@ function selo_status(string $status): string
     return '<span class="Pill ' . STATUS_COR[$status] . '">' . e(STATUS[$status]) . '</span>';
 }
 
-// ------------------------------------------------------------------ visibilidade (RG3)
+// ----- Quem pode ver o quê -----
 
 /** O morador vê só o que registrou; a portaria, o que registrou e as ocorrências do dia; o síndico, todas. */
 function pode_ver(array $u, array $o): bool
@@ -34,7 +34,7 @@ function pode_ver(array $u, array $o): bool
         && $o['registrada_em'] !== null && substr($o['registrada_em'], 0, 10) === date('Y-m-d');
 }
 
-/** RG3: a portaria vê as ocorrências do dia sem as fotos. */
+/** As fotos são só para o autor e o síndico: a portaria vê as ocorrências do dia sem elas. */
 function pode_ver_fotos(array $u, array $o): bool
 {
     return $u['perfil'] === 'sindico' || (int) $o['autor_id'] === (int) $u['id'];
@@ -88,7 +88,7 @@ function filtro_ocorrencias(array $f): array
     return [$sql ? implode(' AND ', $sql) : '1 = 1', $p];
 }
 
-// ------------------------------------------------------------------ registrar (RF02, RF03)
+// ----- Registrar -----
 
 /** Valida e grava uma ocorrência nova. Devolve o id ou a lista de erros para mostrar no formulário. */
 function criar_ocorrencia(array $u, array $dados, array $fotos): int|array
@@ -118,7 +118,7 @@ function criar_ocorrencia(array $u, array $dados, array $fotos): int|array
         $erros['referencia_local'] = 'O complemento do local pode ter até 60 caracteres.';
     }
 
-    // RG4: só a portaria e o síndico indicam a unidade envolvida; o morador usa a própria.
+    // Só a portaria e o síndico indicam a unidade envolvida; o morador usa a própria.
     $unidade = $u['unidade_id'];
     if ($u['perfil'] !== 'morador') {
         $unidade = ctype_digit((string) ($dados['unidade_id'] ?? '')) ? (int) $dados['unidade_id'] : null;
@@ -143,7 +143,7 @@ function criar_ocorrencia(array $u, array $dados, array $fotos): int|array
         return $erros;
     }
 
-    $agora = agora(); // RNF06: data e hora do servidor, nunca do formulário
+    $agora = agora(); // data e hora do servidor, nunca do formulário
     bd()->beginTransaction();
     try {
         consulta(
@@ -172,7 +172,7 @@ function criar_ocorrencia(array $u, array $dados, array $fotos): int|array
         throw $e;
     }
 
-    // RF06: avisa os síndicos (fora da transação: aviso que falha não desfaz o registro).
+    // Avisa os síndicos fora da transação: se o aviso falhar, a ocorrência continua registrada.
     $sindicos = consulta('SELECT id FROM usuarios WHERE perfil = "sindico" AND ativo = 1 AND id <> ?', [$u['id']])->fetchAll(PDO::FETCH_COLUMN);
     foreach ($sindicos as $sindicoId) {
         avisar((int) $sindicoId, $id, "Nova ocorrência nº $id registrada.");
@@ -226,9 +226,9 @@ function fotos_enviadas(?array $campo): array
     return $lista;
 }
 
-// ------------------------------------------------------------------ responder (RF05, RF07)
+// ----- Responder e complementar -----
 
-/** RG1 e RF05: o síndico muda o status com comentário obrigatório. Devolve null ou a mensagem de erro. */
+/** O síndico muda o status e é obrigado a escrever um comentário. Devolve null ou a mensagem de erro. */
 function mover_status(array $u, array $o, string $novo, string $comentario): ?string
 {
     $comentario = trim($comentario);
@@ -271,7 +271,7 @@ function mover_status(array $u, array $o, string $novo, string $comentario): ?st
     return null;
 }
 
-/** RG2 e RF07: nada é editado; correções e novas informações entram como complemento no histórico. */
+/** Nada é editado: correções e novas informações entram como complemento no histórico. */
 function complementar(array $u, array $o, string $texto): ?string
 {
     $texto = trim($texto);
@@ -309,7 +309,7 @@ function complementar(array $u, array $o, string $texto): ?string
     return null;
 }
 
-// ------------------------------------------------------------------ CSV (RF10, RF11)
+// ----- Importar e exportar em CSV -----
 
 const COLUNAS_LIVRO = ['id', 'data', 'hora', 'dia_semana', 'turno', 'registrante', 'local', 'bloco_andar', 'categoria',
     'descricao_resumo', 'urgencia_percebida', 'houve_resposta', 'data_resposta', 'desfecho', 'recorrencia', 'completo'];
@@ -360,7 +360,7 @@ function sim_nao(string $texto): ?bool
 }
 
 /**
- * RF10: importa a transcrição do livro físico (campos do dicionário de dados do Apêndice C).
+ * Importa a transcrição do livro físico (as colunas esperadas estão em banco/exemplo_livro_fisico.csv).
  * Tudo ou nada: se alguma linha tiver erro, nada é gravado e os erros são devolvidos por linha.
  */
 function importar_livro(array $u, string $conteudo): array
@@ -477,7 +477,7 @@ function importar_livro(array $u, string $conteudo): array
     return ['erros' => [], 'importados' => count($prontos), 'ignorados' => $ignorados];
 }
 
-/** RF11: envia as ocorrências filtradas em CSV (separador ; e BOM, para abrir direto no Excel). */
+/** Envia as ocorrências filtradas em CSV (separador ; e BOM, para abrir direto no Excel). */
 function exportar_csv(array $filtros): never
 {
     [$onde, $params] = filtro_ocorrencias($filtros);

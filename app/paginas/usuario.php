@@ -1,6 +1,6 @@
 <?php
-// RF12: cadastrar, desativar e alterar o perfil de usuários. Toda alteração pede a senha
-// do síndico de novo (RNF03) e fica no registro de acessos (RNF02).
+// Cadastrar, desativar e alterar o perfil de usuários. Toda alteração pede a senha
+// do síndico de novo e fica no registro de acessos.
 $u = exigir_login('sindico');
 $novo = $id === null;
 $alvo = $novo ? null : consulta(

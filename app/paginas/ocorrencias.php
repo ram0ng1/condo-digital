@@ -1,5 +1,5 @@
 <?php
-// RF04 (minhas ocorrências), RG3 (ocorrências do dia para a portaria) e RF08 (pesquisa do síndico).
+// Lista de ocorrências: as do próprio morador, as do dia para a portaria e a pesquisa do síndico.
 // A lista mostra só categoria, local, data e status; a descrição aparece ao abrir a ocorrência.
 $u = exigir_login();
 $sindico = $u['perfil'] === 'sindico';
