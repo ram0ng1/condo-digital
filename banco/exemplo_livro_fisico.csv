@@ -1,0 +1,121 @@
+﻿id;data;hora;dia_semana;turno;registrante;local;bloco_andar;categoria;descricao_resumo;urgencia_percebida;houve_resposta;data_resposta;desfecho;recorrencia;completo
+1;01/04/2025;20:00;;;morador;"Salão de festas";;"Áreas comuns";"Dano em equipamento de uso comum.";média;sim;07/04/2025;resolvida;;não
+2;06/04/2025;23:50;;;portaria;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;não;;"sem registro";;sim
+3;11/04/2025;18:10;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;sim;;pendente;;sim
+4;25/04/2025;10:10;;;morador;Fachada;;"Obras e reformas";"Obra com ruído fora do horário permitido.";baixa;não;;"sem registro";;sim
+5;26/04/2025;22:20;;;portaria;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;não;;"sem registro";;sim
+6;27/04/2025;10:40;;;morador;Unidade;;"Obras e reformas";"Obra com ruído fora do horário permitido.";alta;sim;;resolvida;;sim
+7;02/05/2025;22:40;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+8;09/05/2025;19:40;;;morador;Elevador;;Animais;"Animal circulando sem guia em área comum.";média;não;;"sem registro";;sim
+9;12/05/2025;00:30;;;zeladoria;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;não;;"sem registro";;sim
+10;17/05/2025;21:00;;;"não identificado";Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;sim;23/05/2025;resolvida;;não
+11;18/05/2025;21:00;;;morador;Elevador;;Limpeza;"Lixo deixado fora do local de coleta.";baixa;não;;"sem registro";;sim
+12;28/05/2025;23:20;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;11/06/2025;resolvida;;sim
+13;30/05/2025;08:00;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;sim
+14;06/06/2025;19:20;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;sim
+15;07/06/2025;23:40;;;"não identificado";Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;não;;"sem registro";;sim
+16;08/06/2025;17:20;;;morador;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;não
+17;12/06/2025;19:10;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";alta;sim;;resolvida;;não
+18;15/06/2025;19:50;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;sim
+19;16/06/2025;19:10;;;morador;Elevador;;Animais;"Animal circulando sem guia em área comum.";baixa;não;;"sem registro";;sim
+20;25/06/2025;17:00;;;portaria;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;não;;"sem registro";;não
+21;30/06/2025;19:40;;;portaria;Elevador;;Elevador;"Elevador parado entre andares.";baixa;sim;03/07/2025;resolvida;;sim
+22;05/07/2025;;;;"não identificado";Elevador;;Elevador;"Elevador parado entre andares.";baixa;sim;14/07/2025;pendente;;não
+23;14/07/2025;17:10;;;morador;Garagem;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;não;;"sem registro";;não
+24;26/07/2025;19:30;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;sim
+25;11/08/2025;01:00;;;portaria;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;sim;12/08/2025;pendente;;não
+26;17/08/2025;22:10;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;sim;;resolvida;;sim
+27;19/08/2025;20:20;;;portaria;Elevador;;Elevador;"Elevador parado entre andares.";baixa;sim;;resolvida;;sim
+28;25/08/2025;18:20;;;morador;Elevador;;Animais;"Animal circulando sem guia em área comum.";alta;não;;"sem registro";;sim
+29;28/08/2025;11:20;;;zeladoria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;sim;;resolvida;;sim
+30;06/09/2025;;;;morador;Garagem;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;não
+31;09/09/2025;08:00;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;sim
+32;10/09/2025;23:30;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;não;;"sem registro";;sim
+33;20/09/2025;;;;morador;Fachada;;"Obras e reformas";"Obra com ruído fora do horário permitido.";baixa;sim;04/10/2025;resolvida;;não
+34;23/09/2025;19:00;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;não
+35;27/09/2025;22:20;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;03/10/2025;resolvida;;sim
+36;30/09/2025;09:30;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";alta;não;;"sem registro";;sim
+37;03/10/2025;01:40;;;morador;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;12/10/2025;resolvida;;sim
+38;04/10/2025;18:10;;;"não identificado";Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;não;;"sem registro";;sim
+39;08/10/2025;21:50;;;morador;"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";média;sim;17/10/2025;pendente;;sim
+40;09/10/2025;18:30;;;"não identificado";"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;sim;;resolvida;;sim
+41;11/10/2025;17:10;;;morador;"Salão de festas";;"Áreas comuns";"Dano em equipamento de uso comum.";alta;sim;25/10/2025;pendente;;sim
+42;12/10/2025;19:30;;;zeladoria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";alta;não;;"sem registro";;sim
+43;20/10/2025;20:00;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;21/10/2025;resolvida;;sim
+44;21/10/2025;19:40;;;portaria;Portaria;;Encomendas;"Encomenda não localizada na portaria.";baixa;sim;27/10/2025;resolvida;;não
+45;30/10/2025;18:20;;;morador;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;sim
+46;02/11/2025;00:50;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;;pendente;;sim
+47;03/11/2025;18:10;;;morador;"Área de lazer";;"Áreas comuns";"Dano em equipamento de uso comum.";baixa;não;;"sem registro";;sim
+48;07/11/2025;00:40;;;portaria;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;sim;21/11/2025;resolvida;;sim
+49;09/11/2025;19:00;;;portaria;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;não;;"sem registro";;sim
+50;11/11/2025;19:10;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";alta;não;;"sem registro";;sim
+51;22/11/2025;23:40;;;portaria;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+52;24/11/2025;17:30;;;portaria;Elevador;;Elevador;"Elevador parado entre andares.";média;não;;"sem registro";;não
+53;29/11/2025;00:50;;;morador;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;20/12/2025;resolvida;;sim
+54;03/12/2025;20:40;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+55;04/12/2025;07:40;;;zeladoria;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;sim;;resolvida;;sim
+56;05/12/2025;20:20;;;morador;"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";média;não;;"sem registro";;sim
+57;06/12/2025;11:50;;;morador;"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";média;não;;"sem registro";;sim
+58;10/12/2025;19:20;;;zeladoria;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;sim;19/12/2025;resolvida;;não
+59;14/12/2025;17:30;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;não;;"sem registro";;sim
+60;21/12/2025;17:40;;;morador;Elevador;;Elevador;"Elevador parado entre andares.";baixa;sim;24/12/2025;resolvida;;sim
+61;23/12/2025;07:10;;;morador;"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";média;não;;"sem registro";;sim
+62;02/01/2026;20:10;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+63;08/01/2026;09:00;;;morador;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;sim
+64;09/01/2026;19:40;;;portaria;Elevador;;Limpeza;"Lixo deixado fora do local de coleta.";média;não;;"sem registro";;sim
+65;12/01/2026;08:40;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;não;;"sem registro";;sim
+66;23/01/2026;11:10;;;morador;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;não;;"sem registro";;sim
+67;26/01/2026;00:40;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;27/01/2026;resolvida;;sim
+68;30/01/2026;19:30;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";alta;sim;31/01/2026;resolvida;;sim
+69;31/01/2026;22:10;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+70;13/02/2026;22:30;;;portaria;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+71;15/02/2026;21:30;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;21/02/2026;resolvida;;sim
+72;17/02/2026;17:00;;;portaria;Garagem;;Limpeza;"Lixo deixado fora do local de coleta.";baixa;não;;"sem registro";;não
+73;21/02/2026;;;;morador;Garagem;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;sim;24/02/2026;pendente;;não
+74;22/02/2026;19:00;;;morador;Elevador;;Elevador;"Elevador parado entre andares.";média;sim;08/03/2026;resolvida;;sim
+75;25/02/2026;20:10;;;morador;Portaria;;Encomendas;"Encomenda não localizada na portaria.";baixa;não;;"sem registro";;sim
+76;04/03/2026;22:40;;;portaria;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;não;;"sem registro";;sim
+77;07/03/2026;14:10;;;morador;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";alta;não;;"sem registro";;sim
+78;20/03/2026;07:50;;;"não identificado";"Salão de festas";;"Áreas comuns";"Dano em equipamento de uso comum.";média;não;;"sem registro";;sim
+79;23/03/2026;22:40;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;06/04/2026;resolvida;;sim
+80;27/03/2026;18:20;;;morador;Elevador;;Elevador;"Elevador parado entre andares.";média;não;;"sem registro";;sim
+81;01/04/2026;18:20;;;morador;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;não;;"sem registro";;sim
+82;02/04/2026;09:30;;;portaria;"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";média;não;;"sem registro";;sim
+83;04/04/2026;22:00;;;"não identificado";Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;18/04/2026;resolvida;;não
+84;07/04/2026;22:20;;;portaria;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;13/04/2026;resolvida;;sim
+85;12/04/2026;21:10;;;portaria;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;não;;"sem registro";;sim
+86;20/04/2026;14:10;;;"não identificado";"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";alta;não;;"sem registro";;não
+87;02/05/2026;08:50;;;morador;Garagem;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;sim
+88;03/05/2026;01:50;;;"não identificado";Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;;pendente;;sim
+89;05/05/2026;18:00;;;zeladoria;Elevador;;Animais;"Animal circulando sem guia em área comum.";média;não;;"sem registro";;sim
+90;20/05/2026;22:00;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;sim;;pendente;;sim
+91;23/05/2026;20:10;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;não;;"sem registro";;sim
+92;30/05/2026;;;;morador;"Área de lazer";;Animais;"Animal circulando sem guia em área comum.";média;não;;"sem registro";;não
+93;31/05/2026;18:10;;;portaria;"Hall e corredores";;"Áreas comuns";"Dano em equipamento de uso comum.";alta;não;;"sem registro";;não
+94;10/06/2026;14:50;;;morador;Garagem;;"Segurança e portaria";"Portão de pedestres ficou aberto.";alta;não;;"sem registro";;sim
+95;16/06/2026;22:40;;;portaria;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+96;19/06/2026;20:40;;;portaria;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;sim;;resolvida;;sim
+97;20/06/2026;08:10;;;morador;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;sim
+98;26/06/2026;20:30;;;morador;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;não;;"sem registro";;sim
+99;28/06/2026;22:40;;;zeladoria;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;12/07/2026;resolvida;;sim
+100;29/06/2026;08:30;;;portaria;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;sim;20/07/2026;resolvida;;sim
+101;04/07/2026;23:10;;;morador;"Área de lazer";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;sim;10/07/2026;resolvida;;sim
+102;06/07/2026;19:40;;;morador;Garagem;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;sim;20/07/2026;pendente;;sim
+103;17/07/2026;;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";baixa;sim;18/07/2026;resolvida;;não
+104;19/07/2026;20:30;;;morador;"Hall e corredores";;Limpeza;"Lixo deixado fora do local de coleta.";média;sim;;resolvida;;sim
+105;25/07/2026;21:30;;;"não identificado";"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+106;26/07/2026;08:20;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";alta;não;;"sem registro";;sim
+107;30/07/2026;08:10;;;"não identificado";"Área de lazer";;Animais;"Animal circulando sem guia em área comum.";baixa;não;;"sem registro";;sim
+108;04/08/2026;08:10;;;portaria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;não;;"sem registro";;sim
+109;07/08/2026;22:20;;;zeladoria;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;não;;"sem registro";;sim
+110;08/08/2026;21:10;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";baixa;sim;17/08/2026;resolvida;;sim
+111;19/08/2026;07:00;;;morador;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;sim
+112;20/08/2026;;;;morador;"Área de lazer";;"Áreas comuns";"Dano em equipamento de uso comum.";alta;não;;"sem registro";;não
+113;26/08/2026;18:20;;;morador;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;não;;"sem registro";;sim
+114;30/08/2026;21:00;;;morador;"Hall e corredores";;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";baixa;não;;"sem registro";;sim
+115;05/09/2026;22:10;;;morador;Unidade;;Barulho;"Som alto após as 22h, com queixa de vizinhos.";alta;não;;"sem registro";;sim
+116;06/09/2026;16:50;;;morador;Fachada;;"Obras e reformas";"Obra com ruído fora do horário permitido.";média;não;;"sem registro";;sim
+117;11/09/2026;23:40;;;morador;"Salão de festas";;Barulho;"Som alto após as 22h, com queixa de vizinhos.";média;não;;"sem registro";;sim
+118;17/09/2026;11:10;;;zeladoria;Garagem;;"Garagem e veículos";"Veículo estacionado fora da vaga, impedindo a passagem.";média;não;;"sem registro";;não
+119;22/09/2026;19:00;;;portaria;"Hall e corredores";;"Áreas comuns";"Dano em equipamento de uso comum.";média;sim;;resolvida;;sim
+120;24/09/2026;;;;zeladoria;Unidade;;"Vazamento ou infiltração";"Vazamento de água com mancha no teto.";média;não;;"sem registro";;não

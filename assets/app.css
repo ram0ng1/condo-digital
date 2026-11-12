@@ -1,0 +1,175 @@
+/* =====================================================================
+   Livro de Ocorrências Digital
+   Ajustes do design system (ds.css, feito para aplicativo de desktop) para a web e para
+   o celular (RNF04), mais os poucos componentes que o sistema acrescenta.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------- da janela de desktop para a página web */
+
+:root { --titlebar: var(--s3); }
+html, body { height: auto; min-height: 100%; }
+body { overflow: auto; user-select: text; font-size: 15px; }
+
+.Shell { height: auto; min-height: 100vh; align-items: start; }
+.Sidebar { position: sticky; top: var(--s3); height: calc(100vh - 2 * var(--s3)); }
+.Sidebar form { margin-top: auto; }
+.Main { min-height: calc(100vh - 2 * var(--s3)); }
+.Content { overflow: visible; }
+.Topbar-menu { display: none; }
+.Topbar-titulo { font-size: 15px; }
+
+a.Brand, a.UserChip, a.Stat, a.List-item { color: inherit; text-decoration: none; }
+.PageHead h1 .Pill { margin-left: 8px; vertical-align: middle; }
+.Notice { margin-bottom: var(--s4); }
+.Notice--topo { position: fixed; z-index: 10; top: var(--s4); left: 50%; transform: translateX(-50%); box-shadow: var(--shadow-pop); }
+.List-text strong, .List-text small { white-space: normal; }
+.Card .Notice:last-child { margin-bottom: 0; }
+
+.SoLeitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.PuloConteudo { position: absolute; left: var(--s3); top: -60px; z-index: 5000; padding: 10px 16px; border-radius: var(--radius-sm); background: var(--primary); color: #fff; font-weight: 700; }
+.PuloConteudo:focus { top: var(--s3); }
+
+/* ---------------------------------------------------------------- formulários, filtros e listas */
+
+.Toolbar { align-items: flex-end; }
+.Toolbar .Field { gap: 4px; }
+.Toolbar .Field label { font-size: 12px; color: var(--muted); }
+.Segmented { margin-bottom: var(--s4); }
+.Segmented a {
+  display: inline-flex; align-items: center; min-height: 36px; padding: 6px 16px;
+  border-radius: var(--radius-pill); color: var(--muted); font-weight: 600; text-decoration: none; white-space: nowrap;
+}
+.Segmented a:hover { background: var(--surface-2); color: var(--text); }
+.Segmented a.is-active { color: var(--primary-contrast); background: var(--primary); }
+
+.Form-acoes { display: flex; justify-content: flex-end; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s5); }
+.Input--arquivo { height: auto; padding: 8px; }
+.Field-rotulo { font-size: 13px; font-weight: 600; }
+.Paginacao { display: flex; align-items: center; justify-content: center; gap: var(--s3); margin-top: var(--s4); }
+.ListaErros { margin: 6px 0 0; padding-left: 18px; }
+.Colunas { columns: 2; margin: 8px 0; padding-left: 18px; }
+.Rolagem { overflow: auto; max-width: 100%; }
+
+dialog.Modal { border: 0; padding: 0; color: var(--text); }
+dialog.Modal:not([open]) { display: none; }
+dialog.Modal::backdrop { background: var(--overlay); }
+
+/* ---------------------------------------------------------------- ocorrência */
+
+.Descricao { margin: 0; font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; }
+.Fotos { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s4); }
+.Fotos img { display: block; width: 140px; height: 140px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+.Timeline li { font-size: 14px; }
+.Timeline-texto { margin: 4px 0 0; overflow-wrap: anywhere; }
+
+/* ---------------------------------------------------------------- painel de indicadores */
+
+a.Stat { padding: 8px 10px; margin: -8px -10px; border-radius: var(--radius-sm); }
+a.Stat:hover { background: var(--surface-2); }
+.Ponto.is-alerta .List-icon { color: var(--warning); }
+
+.HBar { gap: 10px; }
+.Pareto-corte {
+  margin: 2px 0 4px; padding-top: 5px; border-top: 1.5px dashed var(--primary-accent);
+  font-size: 12px; font-weight: 700; color: var(--primary-accent);
+}
+
+/* O balão do mês aparece acima da barra: a folga no topo evita que a rolagem horizontal o corte. */
+.Bars-rolagem { overflow-x: auto; padding-top: 72px; margin-top: -56px; }
+.Bars { min-width: fit-content; }
+.Bars-col { min-width: 30px; border-radius: 8px; }
+.Bars-col:focus-visible .Bars-tip { display: block; }
+.Bars-bar { max-width: 22px; }
+.Bars-tip { text-align: left; }
+
+.TabelaDados { margin-top: var(--s4); }
+.TabelaDados summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted); }
+.TabelaDados .Rolagem { margin-top: var(--s2); max-height: 320px; }
+
+/* Mapa de calor: um só matiz, do claro (poucas) ao escuro (muitas); o número fica sempre visível. */
+.Mapa { width: 100%; border-collapse: separate; border-spacing: 3px; font-size: 13px; }
+.Mapa th { padding: 4px 8px; font-size: 11.5px; font-weight: 700; color: var(--muted); text-align: center; white-space: nowrap; }
+.Mapa th[scope='row'] { text-align: left; }
+.Mapa tbody td {
+  height: 38px; min-width: 60px; border-radius: 8px; text-align: center; font-weight: 600;
+  /* A escala para em 58 % do verde escuro: o número em texto escuro mantém contraste de 4,5:1 em toda célula. */
+  background: color-mix(in srgb, var(--primary-chart-strong) calc(var(--i) * 58%), var(--surface-2));
+}
+
+/* ---------------------------------------------------------------- celular e tablet (RNF04) */
+
+@media (max-width: 900px) {
+  .Shell { grid-template-columns: minmax(0, 1fr); padding: var(--s2); }
+  .Sidebar {
+    position: fixed; inset: 0 auto 0 0; z-index: 2500; width: min(300px, 86vw); height: 100%;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0; box-shadow: var(--shadow-pop);
+    transform: translateX(-105%); transition: transform 0.2s ease; visibility: hidden;
+  }
+  body.menu-aberto .Sidebar { transform: none; visibility: visible; }
+  body.menu-aberto::before { content: ''; position: fixed; inset: 0; z-index: 2400; background: var(--overlay); }
+  .Topbar-menu { display: inline-flex; }
+  .Topbar { min-height: 56px; padding: var(--s2) var(--s3); }
+  .Main { min-height: calc(100vh - 2 * var(--s2)); gap: var(--s2); }
+  .Content { padding: var(--s4); }
+  .UserChip { padding: 4px; }
+  .UserChip-text { display: none; }
+
+  .Grid-2, .Grid-3, .Grid-4, .Grid-main-side { grid-template-columns: minmax(0, 1fr); }
+  .FormGrid .Field { grid-column: 1 / -1; }
+  .Toolbar .Field { flex: 1 1 calc(50% - var(--s2)); }
+  .Toolbar .Input { width: 100%; min-width: 0; }
+  .PageHead h1 { font-size: 23px; }
+  .PageHead-actions .Button { flex: 1; }
+  .Card { padding: var(--s4); }
+  .Card .TableWrap { margin: 0 calc(var(--s4) * -1) calc(var(--s4) * -1); }
+  .Kpi { min-height: 112px; }
+  .Kpi .Kpi-label { padding-right: 0; }
+  .Kpi .Kpi-value { font-size: 26px; }
+  .Kpi .Kpi-note { white-space: normal; }
+  .Table th, .Table td { padding: 6px 12px; }
+  .Form-acoes .Button { flex: 1; }
+  .Colunas { columns: 1; }
+
+  .Login { grid-template-columns: minmax(0, 1fr); height: auto; min-height: 100vh; padding: var(--s2); }
+  .Login-hero { display: none; }
+  .Login-panel { padding: var(--s3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* O nome do sistema é mais longo que o do aplicativo original do design system. */
+.Brand .Brand-name { font-size: 15.5px; }
+
+/* Elementos só para leitor de tela dentro de áreas com rolagem não podem alargar a página. */
+.TableWrap, .Rolagem { position: relative; }
+
+/* No celular, as listas viram cartões: o status fica sempre à vista, sem rolar para o lado. */
+@media (max-width: 700px) {
+  .Table.is-lista, .Table.is-lista tbody { display: block; }
+  .Table.is-lista thead { display: none; } /* o rótulo de cada coluna passa a acompanhar o valor */
+  .Table.is-lista tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .Table.is-lista tbody tr:last-child { border-bottom: 0; }
+  .Table.is-lista td { display: block; width: auto; height: auto; min-width: 0; padding: 0; border: 0; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+  .Table.is-lista td[data-rotulo]::before {
+    content: attr(data-rotulo); display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
+  }
+  .Table.is-lista td:empty { display: none; }
+  .Table.is-lista td.c-status { grid-row: 1; grid-column: 2; justify-self: end; }
+  .Table.is-lista td.c-inteira { grid-column: 1 / -1; }
+  .Table.is-lista td.actions .Button { width: 100%; }
+}
+
+@media (max-width: 900px) {
+  .UserChip .UserChip-text { display: none; }
+  a.Stat { margin: 0; padding: 4px 0; }
+}
+
+.Check--menor { min-height: 0; font-size: 13px; color: var(--muted); }
+.Contador { text-align: right; }
+
+/* Cabem 24 meses sem rolagem em telas largas; em telas estreitas o gráfico rola para o lado. */
+.Bars { gap: 4px; }
+.Bars-col { min-width: 34px; }

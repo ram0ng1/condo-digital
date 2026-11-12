@@ -1,0 +1,14 @@
+# Tudo passa pelo index.php, menos os arquivos estáticos de /assets. Assim nada em app/,
+# banco/, storage/ (fotos) ou testes/ pode ser aberto direto pelo navegador.
+Options -Indexes
+RewriteEngine On
+RewriteRule ^assets/ - [L]
+RewriteRule ^index\.php$ - [L]
+RewriteRule ^ index.php [L]
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "same-origin"
+    Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; form-action 'self'"
+</IfModule>

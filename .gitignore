@@ -1,0 +1,7 @@
+# Configuração do ambiente (credenciais do banco) e dados de uso
+/app/config.local.php
+/storage/fotos/*
+!/storage/fotos/.gitkeep
+
+# Saídas geradas
+/docs/telas/
