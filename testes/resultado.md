@@ -9,7 +9,7 @@ Executado em 12/11/2026, 12:06:35 contra http://tcc.test, com o banco de demonst
 | CT01 | UC01 | Morador entra e cai em "Minhas ocorrências"; síndico cai no painel | Aprovado |
 | CT02 | UC01 | Senha incorreta: mensagem igual à de e-mail inexistente, sem entrar | Aprovado |
 | CT03 | UC01 | Cinco senhas erradas seguidas bloqueiam a conta, mesmo para a senha correta | Aprovado |
-| CT04 | UC01 | Página interna sem login redireciona para a tela de entrada | Aprovado |
+| CT04 | UC01 | Página interna sem sessão aberta redireciona para a tela de entrada | Aprovado |
 | CT05 | UC02 | Morador registra ocorrência com foto; ela nasce "Aberta" com data e hora do servidor | Aprovado |
 | CT06 | UC02 | Descrição curta demais é recusada pelo servidor, com a mensagem junto ao campo | Aprovado |
 | CT07 | UC02 | Arquivo que não é imagem é recusado como foto | Aprovado |

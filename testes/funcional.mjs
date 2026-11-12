@@ -91,7 +91,7 @@ await ct('CT03', 'UC01', 'Cinco senhas erradas seguidas bloqueiam a conta, mesmo
   await p.context().close();
 });
 
-await ct('CT04', 'UC01', 'Página interna sem login redireciona para a tela de entrada', async (v) => {
+await ct('CT04', 'UC01', 'Página interna sem sessão aberta redireciona para a tela de entrada', async (v) => {
   const c = await navegador.newContext();
   const p = await c.newPage();
   for (const rota of ['painel', 'ocorrencias', 'ocorrencias/1', 'usuarios', 'acessos', 'fotos/1']) {
