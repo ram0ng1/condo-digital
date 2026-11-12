@@ -8,6 +8,8 @@ cada perfil vê só o que lhe cabe; e um painel de indicadores apoia as decisõe
 PHP 8.5 sem framework, MariaDB e HTML/CSS com design system próprio. Sem dependências
 externas para executar.
 
+As telas do sistema, organizadas por requisito funcional, estão em [docs/README.md](docs/README.md).
+
 ## Rodar no RStack
 
 O site já responde em <http://tcc.test> (pasta `D:\RStack\www\TCC`, banco `tcc`).

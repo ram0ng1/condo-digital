@@ -3,5 +3,3 @@
 /storage/fotos/*
 !/storage/fotos/.gitkeep
 
-# Saídas geradas
-/docs/telas/
